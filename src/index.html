@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Electron screen recorder @latest version</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="index.css" />
+    <script defer src="effects.js"></script>
+    <script defer src="render.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card mt-5">
+        <div class="card-header">
+          Electron Screen Recorder
+        </div>
+        <div class="card-body">
+          <div id="sourceNotSelected" class="text-center">
+            Video source not selected
+          </div>
+          <video id="video"></video>
+        </div>
+        <div class="card-footer row">
+          <div class="col">
+            <button id="startBtn" class="btn btn-primary">
+              Start recording
+            </button>
+            <button id="stopBtn" class="btn btn-secondary" style="display:none">
+              Stop recording
+            </button>
+          </div>
+          <div class="col">
+            <div class="float-end">
+              <button id="closeVideoShare" class="btn btn-danger" style="display:none">
+                Close sharing
+              </button>
+              <button id="videoSelectBtn" class="btn btn-warning">
+                Select video source
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
