@@ -5,37 +5,39 @@
     <title>Electron screen recorder @latest version</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="index.css" />
-    <script defer src="effects.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script defer src="render.js"></script>
   </head>
   <body>
     <div class="container">
       <div class="card mt-5">
-        <div class="card-header">
-          Electron Screen Recorder
+        <div class="card-header h4">
+          <i class="text-primary fa-solid fa-atom"></i> Electron Screen Recorder
         </div>
         <div class="card-body">
-          <div id="sourceNotSelected" class="text-center">
+          <div id="sourceNotSelectedText" class="text-center mx-auto justify-content-center">
             Video source not selected
           </div>
-          <video id="video"></video>
+          <video id="video" style="display:none"></video>
         </div>
         <div class="card-footer row">
-          <div class="col">
-            <button id="startBtn" class="btn btn-primary">
-              Start recording
-            </button>
-            <button id="stopBtn" class="btn btn-secondary" style="display:none">
-              Stop recording
-            </button>
+          <div class="col-4">
+            <div class="d-flex justify-content-start">
+              <button id="startBtn" class="btn btn-success" style="display:none">
+                <i class="fa-solid fa-play"></i> Start recording
+              </button>
+              <button id="stopBtn" class="btn btn-primary ms-2" style="display:none">
+                <i class="fa-solid fa-download"></i> Stop and save
+              </button>
+            </div>
           </div>
-          <div class="col">
-            <div class="float-end">
-              <button id="closeVideoShare" class="btn btn-danger" style="display:none">
+          <div class="col-8">
+            <div class="d-flex justify-content-end">
+              <button id="closeVideoShareBtn" class="btn btn-danger me-2" style="display:none">
                 Close sharing
               </button>
-              <button id="videoSelectBtn" class="btn btn-warning">
-                Select video source
+              <button id="videoSelectBtn" class="btn btn-outline-dark">
+                <i class="fa-solid fa-desktop"></i> Share screen
               </button>
             </div>
           </div>

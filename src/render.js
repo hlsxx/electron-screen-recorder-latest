@@ -1,18 +1,26 @@
-const videoSelectBtn = document.getElementById('videoSelectBtn');
-const videoElement = document.getElementById('video');
-const stopBtn = document.getElementById('stopBtn');
-
-videoSelectBtn.onclick = getVideoSources;
-
-const electron = require('electron')
+const { writeFile } = require('fs');
+const electron = require('electron');
 
 const electronRemote = process.type === 'browser'
   ? electron
   : require('@electron/remote')
 ;
 
-const { desktopCapturer, Menu } = electronRemote;
+const { desktopCapturer, Menu, dialog } = electronRemote;
 
+/**
+ * Buttons and elements
+ */
+const videoSelectBtn = document.getElementById('videoSelectBtn');
+const startBtn = document.getElementById('startBtn');
+const stopBtn = document.getElementById('stopBtn');
+const videoElement = document.getElementById('video');
+const sourceNotSelectedText = document.getElementById("sourceNotSelectedText");
+const closeVideoShareBtn = document.getElementById("closeVideoShareBtn");
+
+/**
+ * Get video sources
+ */
 async function getVideoSources() {
   const inputSources = await desktopCapturer.getSources({
     types: ['window', 'screen']
@@ -24,24 +32,25 @@ async function getVideoSources() {
         label: source.name,
         click: () => {
           selectSource(source);
-          sourceSelectedToggle();
-          closeVideoShareToggle();
         }
       };
     })
   );
 
-
   videoOptionsMenu.popup();
 }
 
-// SOURCE SELECTION
+videoSelectBtn.onclick = getVideoSources;
 
-let mediaRecorder; // MediaRecorder instance to capture footage
+let mediaRecorder;
 const recordedChunks = [];
 
-// Change the videoSource window to record
 async function selectSource(source) {
+  videoElementToggle(true);
+  startRecordingBtnToggle(true);
+  closeVideoShareBtnToggle(true);
+  
+  sourceNotSelectedText.style.display = "none";
 
   videoSelectBtn.innerText = source.name;
 
@@ -55,52 +64,62 @@ async function selectSource(source) {
     }
   };
 
-  // Create a Stream
+
   const stream = await navigator.mediaDevices
     .getUserMedia(constraints)
   ;
 
-  // Preview the source in a video element
+
   videoElement.srcObject = stream;
   videoElement.play();
 
-  // Create the Media Recorder
+
   const options = { mimeType: 'video/webm; codecs=vp9' };
   mediaRecorder = new MediaRecorder(stream, options);
 
-  // Register Event Handlers
+
   mediaRecorder.ondataavailable = handleDataAvailable;
   mediaRecorder.onstop = handleStop;
 }
 
-// BUTTONS
-
-const { writeFile } = require('fs');
-const { dialog } = electronRemote;
-
-const startBtn = document.getElementById('startBtn');
-startBtn.onclick = e => {
+startBtn.onclick = () => {
   mediaRecorder.start();
   startBtn.className = "btn btn-danger";
   startBtn.innerText = "Recording";
-  stopBtn.style.display = "block";
+  startBtn.setAttribute("disabled", "");
+  videoSelectBtn.setAttribute("disabled", "");
+  closeVideoShareBtn.setAttribute("disabled", "");
+
+  stopRecordingBtnToggle();
 };
 
-stopBtn.onclick = e => {
+stopBtn.onclick = () => {
   mediaRecorder.stop();
-  startBtn.className = "btn btn-primary";
-  startBtn.innerText = "Start recording";
-  
+  startBtn.className = "btn btn-success";
+  startBtn.innerHTML = "<i class=\"fa-solid fa-play\"></i> Start recording";
+  startBtn.removeAttribute("disabled");
+  videoSelectBtn.removeAttribute("disabled");
+  closeVideoShareBtn.removeAttribute("disabled");
+
+  stopRecordingBtnToggle();
 };
 
+closeVideoShareBtn.onclick = () => {
+  videoElement.removeAttribute('src');
+  videoElement.load();
 
-// Captures all recorded chunks
+  startRecordingBtnToggle();
+  closeVideoShareBtnToggle();
+  sourceSelectedToggle();
+  videoElementToggle();
+  videoSelectBtn.innerHTML = "<i class=\"fa-solid fa-desktop\"></i> Share screen";
+}
+
 function handleDataAvailable(e) {
   console.log('video data available');
   recordedChunks.push(e.data);
 }
 
-// Saves the video file on stop
 async function handleStop(e) {
   const blob = new Blob(recordedChunks, {
     type: 'video/webm; codecs=vp9'
@@ -117,6 +136,39 @@ async function handleStop(e) {
   console.log(filePath);
 
   writeFile(filePath, buffer, () => console.log('video saved successfully!'));
+}
+
+/**
+ * 
+ * Some toggle functions
+ * 
+ */
+function elementToggle(element, display = null) {
+  if (display === true || element.style.display == "none") {
+    element.style.display = "block";
+  } else {
+    element.style.display = "none";
+  }
+}
+
+function sourceSelectedToggle(display = null) {
+  elementToggle(sourceNotSelectedText, display);
+}
+
+function closeVideoShareBtnToggle(display = null) {
+  elementToggle(closeVideoShareBtn, display);
+}
+
+function videoElementToggle(display = null) {
+  elementToggle(videoElement, display);
+}
+
+function startRecordingBtnToggle(display = null) {
+  elementToggle(startBtn, display);
+}
+
+function stopRecordingBtnToggle(display = null) {
+  elementToggle(stopBtn, display);
 }
 
 
