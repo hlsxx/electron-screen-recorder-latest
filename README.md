@@ -1,8 +1,7 @@
 # electron-screen-recorder-latest
 Build on Electron.js for **@latest versions** <br>
-Desktop recorder for Linux, Mac, Windows </br>
 
-![Alt text](https://github.com/Bombarder70/electron-screen-recorder-latest/blob/master/.github/img/screen.png?raw=true) <br>
+![Alt text](https://github.com/Bombarder70/electron-screen-recorder-latest/blob/master/.github/img/screen.jpg?raw=true) <br>
 # Electron.js compatible versions <br>
 | Version | Compatible |
 | ------ | ------ |
