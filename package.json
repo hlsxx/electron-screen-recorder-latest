@@ -1,16 +1,23 @@
 {
   "name": "electron-screen-recorder-latest",
   "version": "1.0.0",
-  "description": "",
+  "description": "Electron screen recorder for version 18+",
   "main": "src/index.js",
   "scripts": {
     "start": "electron .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder" 
   },
-  "author": "Bombarder70",
+  "author": "Holes70",
   "license": "ISC",
-  "dependencies": {
+  "devDependencies": {
     "@electron/remote": "^2.0.8",
     "electron": "^19.0.1"
+  },
+  "build": {
+    "appId": "holes70.electron.screen.recorder",
+    "linux": {
+      "category": "recorder"
+    }
   }
 }
