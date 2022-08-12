@@ -11,8 +11,10 @@
   "author": "Holes70",
   "license": "ISC",
   "devDependencies": {
-    "@electron/remote": "^2.0.8",
     "electron": "^19.0.1"
+  },
+  "dependencies": {
+    "@electron/remote": "^2.0.8"
   },
   "build": {
     "appId": "holes70.electron.screen.recorder",
