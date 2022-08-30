@@ -5,6 +5,7 @@ Build on Electron.js for **@latest versions** <br>
 # Electron.js compatible versions <br>
 | Version | Compatible |
 | ------ | ------ |
+| 20.0 | ✅ |
 | 19.0 | ✅ |
 | 18.0 | ✅ |
 | 17.0 | ✅ |
