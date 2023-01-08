@@ -8,9 +8,6 @@ const electronRemote = process.type === 'browser'
 
 const { desktopCapturer, Menu, dialog } = electronRemote;
 
-/**
- * Buttons and elements
- */
 const videoSelectBtn = document.getElementById('videoSelectBtn');
 const startBtn = document.getElementById('startBtn');
 const stopBtn = document.getElementById('stopBtn');
@@ -18,9 +15,6 @@ const videoElement = document.getElementById('video');
 const sourceNotSelectedText = document.getElementById("sourceNotSelectedText");
 const closeVideoShareBtn = document.getElementById("closeVideoShareBtn");
 
-/**
- * Get video sources
- */
 async function getVideoSources() {
   const inputSources = await desktopCapturer.getSources({
     types: ['window', 'screen']
@@ -68,7 +62,6 @@ async function selectSource(source) {
   const stream = await navigator.mediaDevices
     .getUserMedia(constraints)
   ;
-
 
   videoElement.srcObject = stream;
   videoElement.play();
@@ -138,11 +131,6 @@ async function handleStop(e) {
   writeFile(filePath, buffer, () => console.log('video saved successfully!'));
 }
 
-/**
- * 
- * Some toggle functions
- * 
- */
 function elementToggle(element, display = null) {
   if (display === true || element.style.display == "none") {
     element.style.display = "block";

@@ -1,10 +1,13 @@
 # electron-screen-recorder-latest
 Build on Electron.js for **@latest versions** <br>
+Electron.js simple screen recorder.
 
 ![Alt text](https://github.com/Bombarder70/electron-screen-recorder-latest/blob/master/.github/img/screen.jpg?raw=true) <br>
 # Electron.js compatible versions <br>
 | Version | Compatible |
 | ------ | ------ |
+| 22.0 | ✅ |
+| 21.0 | ✅ |
 | 20.0 | ✅ |
 | 19.0 | ✅ |
 | 18.0 | ✅ |
