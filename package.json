@@ -1,6 +1,6 @@
 {
   "name": "electron-screen-recorder-latest",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Electron screen recorder for version 18+",
   "main": "src/index.js",
   "scripts": {
