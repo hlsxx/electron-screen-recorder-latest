@@ -6,12 +6,13 @@
   "scripts": {
     "start": "electron .",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder" 
+    "dist": "electron-builder"
   },
   "author": "Holes70",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^19.0.1"
+    "electron": "^19.0.1",
+    "electron-packager": "^17.1.1"
   },
   "dependencies": {
     "@electron/remote": "^2.0.8"
